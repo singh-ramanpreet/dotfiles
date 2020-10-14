@@ -1,0 +1,32 @@
+# ============================================
+#| title           :which_machine             |
+#| description     :get which machine is this |
+#| author          :Ramanpreet Singh          |
+#| bash_version    :4.2.46 or higher          |
+# ============================================
+
+thisMachine="local"
+isInteractive="True"
+
+# which machine
+case $HOSTNAME in
+    cmslpc*)
+        thisMachine="cmslpc"
+        ;;
+    lxplus*)
+        thisMachine="lxplus"
+        ;;
+    HP-X360-15)
+        thisMachine="local"
+        ;;
+esac
+
+# which shell
+case $- in
+    *i*)
+        isInteractive=true
+        ;;
+      *)
+        isInteractive=false
+        ;;
+esac
