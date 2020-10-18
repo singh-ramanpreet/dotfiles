@@ -57,9 +57,9 @@ while test -n "$1"; do
 done
 
 
-echo "Installing diff-so-fancy"
 PATTERN="^(diff-so-fancy|all)$"
 if [[ $install_this =~ $PATTERN || $reinstall_this =~ $PATTERN ]]; then
+echo "Installing diff-so-fancy"
   if [[ $reinstall_this =~ $PATTERN ]]; then
     echo "... cleaning up for re-installation"
     rm -rf $HOME/.diff-so-fancy
@@ -74,3 +74,21 @@ if [[ $install_this =~ $PATTERN || $reinstall_this =~ $PATTERN ]]; then
   echo "Done"
 fi
 
+
+PATTERN="^(fzf|all)$"
+if [[ $install_this =~ $PATTERN || $reinstall_this =~ $PATTERN ]]; then
+echo "Installing fzf"
+  if [[ $reinstall_this =~ $PATTERN ]]; then
+    echo "... cleaning up for re-installation"
+    rm -rf $HOME/.fzf
+  fi
+
+  if [[ -d $HOME/.fzf ]]; then
+    echo "... already installed, skipping."
+  else
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --key-bindings --completion --no-update-rc --no-zsh --no-fish
+  fi
+
+  echo "Done"
+fi
