@@ -92,3 +92,25 @@ echo "Installing fzf"
 
   echo "Done"
 fi
+
+
+PATTERN="^(powerline-go|all)$"
+if [[ $install_this =~ $PATTERN || $reinstall_this =~ $PATTERN ]]; then
+echo "Installing powerline-go"
+  if [[ $reinstall_this =~ $PATTERN ]]; then
+    echo "... cleaning up for re-installation"
+    rm $HOME/.local/bin/powerline-go
+  fi
+
+  if [[ -d $HOME/.local/bin/powerline-go ]]; then
+    echo "... already installed, skipping."
+  else
+    download_url=$(curl -s https://api.github.com/repos/justjanne/powerline-go/releases/latest | \
+    grep -E "browser_download_url.*linux-amd64" | \
+    cut -d ":" -f 2-)
+    wget -O $HOME/.local/bin/powerline-go ${download_url//\"/}
+    chmod +x $HOME/.local/bin/powerline-go
+  fi
+
+  echo "Done"
+fi

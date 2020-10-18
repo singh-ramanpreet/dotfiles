@@ -93,20 +93,13 @@ then
   fi
 fi
 
-# GO Lang
-if [[ $thisMachine =~ ^(local|cmslpc|lxplus)$ ]]
-then
-  export GOPATH=~/.go
-  export PATH=${GOPATH//:/\/bin:}/bin:$PATH
-fi
-
 # poweline-go
 # --------------
 function _update_ps1() {
-  PS1="$(~/.go/bin/powerline-go -newline -modules "venv,user,host,cwd,perms,git,exit,root")"
+  PS1="$(~/.local/bin/powerline-go -newline -modules "venv,user,host,cwd,perms,git,exit,root")"
 }
 
-if [[ $TERM != "linux" && -f ~/.go/bin/powerline-go ]]
+if [[ $TERM != "linux" && -f ~/.local/bin/powerline-go ]]
 then
   PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
