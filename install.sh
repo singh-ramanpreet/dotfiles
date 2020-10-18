@@ -108,6 +108,7 @@ echo "Installing powerline-go"
     download_url=$(curl -s https://api.github.com/repos/justjanne/powerline-go/releases/latest | \
     grep -E "browser_download_url.*linux-amd64" | \
     cut -d ":" -f 2-)
+    mkdir -p $HOME/.local/bin
     wget -O $HOME/.local/bin/powerline-go ${download_url//\"/}
     chmod +x $HOME/.local/bin/powerline-go
   fi
