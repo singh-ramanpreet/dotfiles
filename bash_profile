@@ -87,7 +87,7 @@ fi
 if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
 then
   export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
-  if $isInteractive
+  if $isInteractive && [[ -f /cvmfs/cms.cern.ch/cmsset_default.sh ]]
   then
     source /cvmfs/cms.cern.ch/cmsset_default.sh
   fi
@@ -134,14 +134,15 @@ fi
 export SINGULARITY_SHELL="/bin/bash/"
 if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
 then
-  if $isInteractive
+  if $isInteractive && [[ -f /etc/bash_completion.d/singularity ]]
   then
     source /etc/bash_completion.d/singularity
   fi
 elif [[ $thisMachine =~ ^(local)$ ]]
 then
   export PATH=/opt/singularity/bin:$PATH
-  if $isInteractive
+  if $isInteractive && \
+    [[ -f /opt/singularity/etc/bash_completion.d/singularity ]]
   then
     source /opt/singularity/etc/bash_completion.d/singularity
   fi
