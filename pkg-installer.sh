@@ -40,14 +40,17 @@ done
 
 
 PATTERN="^(diff-so-fancy)$"
-if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]; then
+if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]
+then
 echo "Installing diff-so-fancy"
-  if [[ $reinstall_ =~ $PATTERN ]]; then
+  if [[ $reinstall_ =~ $PATTERN ]]
+  then
     echo "... cleaning up for re-installation"
     rm -rf $HOME/.diff-so-fancy
   fi
 
-  if [[ -d $HOME/.diff-so-fancy ]]; then
+  if [[ -d $HOME/.diff-so-fancy ]]
+  then
     echo "... already installed, skipping."
   else
     git clone https://github.com/so-fancy/diff-so-fancy.git $HOME/.diff-so-fancy
@@ -58,15 +61,18 @@ fi
 
 
 PATTERN="^(fzf)$"
-if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]; then
+if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]
+then
 echo "Installing fzf"
-  if [[ $reinstall_ =~ $PATTERN ]]; then
+  if [[ $reinstall_ =~ $PATTERN ]]
+  then
     echo "... cleaning up for re-installation"
     rm -rf $HOME/.fzf
     rm $HOME/.fzf.*
   fi
 
-  if [[ -d $HOME/.fzf ]]; then
+  if [[ -d $HOME/.fzf ]]
+  then
     echo "... already installed, skipping."
   else
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -78,14 +84,17 @@ fi
 
 
 PATTERN="^(powerline-go)$"
-if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]; then
+if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]
+then
 echo "Installing powerline-go"
-  if [[ $reinstall_ =~ $PATTERN ]]; then
+  if [[ $reinstall_ =~ $PATTERN ]]
+  then
     echo "... cleaning up for re-installation"
     rm $HOME/.local/bin/powerline-go
   fi
 
-  if [[ -f $HOME/.local/bin/powerline-go ]]; then
+  if [[ -f $HOME/.local/bin/powerline-go ]]
+  then
     echo "... already installed, skipping."
   else
     download_url=$(curl -s https://api.github.com/repos/justjanne/powerline-go/releases/latest | \
@@ -101,14 +110,17 @@ fi
 
 
 PATTERN="^(singularity)$"
-if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]; then
+if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]
+then
 echo "Installing singularity"
-  if [[ $reinstall_ =~ $PATTERN ]]; then
+  if [[ $reinstall_ =~ $PATTERN ]]
+  then
     echo "... cleaning up for re-installation"
     sudo rm -rf /opt/singularity
   fi
 
-  if [[ -d /opt/singularity ]]; then
+  if [[ -d /opt/singularity ]]
+  then
     echo "... already installed, skipping."
   else
     echo "... installing dependencies"
@@ -141,6 +153,40 @@ echo "Installing singularity"
       cd ..
       rm -rf singularity*
     )
+  fi
+
+  echo "Done"
+fi
+
+PATTERN="^(cvmfs)$"
+if [[ $install_ =~ $PATTERN || $reinstall_ =~ $PATTERN ]]
+then
+echo "Installing cvmfs"
+  if [[ $reinstall_ =~ $PATTERN ]]
+  then
+    echo "... cleaning up for re-installation"
+    sudo apt-get remove -y cvmfs cvmfs-config-default cvmfs-release
+    sudo rm /etc/cvmfs/default.local
+    sudo service autofs stop
+    sudo rm -rf /cvmfs
+  fi
+
+  if command -v cvmfs_config > /dev/null
+  then
+    echo "... already installed, skipping."
+  else
+    wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
+    sudo dpkg -i cvmfs-release-latest_all.deb
+    rm -f cvmfs-release-latest_all.deb
+    sudo apt-get update
+    sudo apt-get install -y cvmfs cvmfs-config-default
+
+    echo "... making default.local"
+    echo "CVMFS_HTTP_PROXY=DIRECT" > default.local
+    echo "CVMFS_REPOSITORIES=sft.cern.ch,cms.cern.ch,unpacked.cern.ch,grid.cern.ch,oasis.opensciencegrid.org" >> default.local
+    sudo mv default.local /etc/cvmfs/default.local
+    sudo service autofs start
+    cvmfs_config probe
   fi
 
   echo "Done"
