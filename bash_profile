@@ -84,7 +84,7 @@ then
 fi
 
 # cmssw commands
-if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
+if [[ $thisMachine =~ ^(local|cmslpc|lxplus)$ ]]
 then
   export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
   if $isInteractive && [[ -f /cvmfs/cms.cern.ch/cmsset_default.sh ]]
