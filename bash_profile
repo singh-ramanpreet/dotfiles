@@ -43,6 +43,13 @@ then
   export LC_ALL=en_US.UTF-8
 fi
 
+# history
+export HISTCONTROL=ignoreboth:erasedups
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+#shopt -s histappend
+#export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
 # display
 if [[ $thisMachine =~ ^(local)$ ]]
 then
