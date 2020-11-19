@@ -86,8 +86,8 @@ fi
 # TexLive
 if [[ $thisMachine =~ ^(local|cmslpc|lxplus)$ ]]
 then
-  export TEXMFVAR=~/.texlive2017/
-  export PATH=/cvmfs/sft.cern.ch/lcg/external/texlive/2017/bin/x86_64-linux:$PATH
+  export TEXMFVAR=~/.texlive2020/
+  export PATH=/cvmfs/sft.cern.ch/lcg/external/texlive/2020/bin/x86_64-linux:$PATH
 fi
 
 # cmssw commands
