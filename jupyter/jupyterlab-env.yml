@@ -5,3 +5,5 @@ dependencies:
   - jupyterlab
   - nodejs
   - jupyterlab-latex
+  - pip:
+    - jupyter-server-proxy
