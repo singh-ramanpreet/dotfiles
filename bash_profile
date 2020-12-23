@@ -36,7 +36,7 @@ then
 fi
 
 # locales
-if [[ $thisMachine =~ ^(cmslpc)$ ]]
+if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
 then
   export LANG=en_US.UTF-8
   export LANGUAGE=en_US.UTF-8
@@ -81,6 +81,12 @@ fi
 if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
 then
   export PS1="\[\e[33m\]$PS1\[\e[m\]"
+fi
+
+# use git version > 2
+if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
+then
+  export PATH=/cvmfs/sft.cern.ch/lcg/contrib/git/2.28.0/x86_64-centos7/bin/:$PATH
 fi
 
 # TexLive
