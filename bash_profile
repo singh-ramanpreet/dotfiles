@@ -87,6 +87,10 @@ fi
 if [[ $thisMachine =~ ^(cmslpc|lxplus)$ ]]
 then
   export PATH=/cvmfs/sft.cern.ch/lcg/contrib/git/2.28.0/x86_64-centos7/bin/:$PATH
+  if $isInteractive && [[ -f ~/.fzf.bash ]]
+  then
+    source ~/.git-completion.bash
+  fi
 fi
 
 # TexLive
@@ -173,7 +177,7 @@ then
   # crab
   alias crab3_source="source /cvmfs/cms.cern.ch/crab3/crab_standalone.sh"
   # jlab venv
-  alias jlab_start="PATH=~/nobackup/miniconda3/envs/jupyterlab/bin/:$PATH jupyter lab"
+  alias jupyter_start="PATH=~/nobackup/miniconda3/envs/jupyterlab/bin/:$PATH jupyter server"
   # setup LCG 97 python3
   alias setup_LCG97python3="source /cvmfs/sft.cern.ch/lcg/views/LCG_97python3/x86_64-centos7-gcc8-opt/setup.sh"
 fi

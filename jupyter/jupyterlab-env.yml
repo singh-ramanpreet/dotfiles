@@ -2,8 +2,7 @@ name: jupyterlab
 channels:
   - conda-forge
 dependencies:
-  - jupyterlab
+  - python
+  - pip
   - nodejs
-  - jupyterlab-latex
-  - pip:
-    - jupyter-server-proxy
+  - jupyterlab
