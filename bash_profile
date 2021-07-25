@@ -70,6 +70,11 @@ then
 fi
 
 # Kerberos
+# Generate keytab
+# > $ ktutil
+# > ktutil:  addent -password -p rsingh@FNAL.GOV -k 1 -f
+# > ktutil:  addent -password -p singhr@CERN.CH -k 1 -f
+# > ktutil:  wkt .ssh/singhr.keytab
 if [[ $thisMachine =~ ^(local)$ ]]
 then
   export KRB5CCNAME="DIR:/tmp"
