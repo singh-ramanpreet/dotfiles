@@ -126,7 +126,8 @@ echo "Installing singularity"
     echo "... installing dependencies"
     sudo apt-get update
     sudo apt-get install -y \
-      golang
+      make \
+      golang \
       build-essential \
       uuid-dev \
       libgpgme-dev \
@@ -140,11 +141,11 @@ echo "Installing singularity"
     echo "... dependencies installed"
     (
       cd /tmp
-      export VERSION=3.6.4
+      export VERSION=3.8.3
       echo "... singularity version to be installed $VERSION"
-      wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-${VERSION}.tar.gz
-      tar -xzf singularity-${VERSION}.tar.gz
-      cd singularity
+      wget https://github.com/sylabs/singularity/releases/download/v${VERSION}/singularity-ce-${VERSION}.tar.gz
+      tar -xzf singularity-ce-${VERSION}.tar.gz
+      cd singularity-ce-${VERSION}
       echo "... building config"
       ./mconfig --prefix=/opt/singularity
       make -C ./builddir
@@ -185,8 +186,9 @@ echo "Installing cvmfs"
     echo "CVMFS_HTTP_PROXY=DIRECT" > default.local
     echo "CVMFS_REPOSITORIES=sft.cern.ch,cms.cern.ch,unpacked.cern.ch,grid.cern.ch,oasis.opensciencegrid.org" >> default.local
     sudo mv default.local /etc/cvmfs/default.local
-    sudo service autofs start
-    cvmfs_config probe
+    sudo cvmfs_config wsl2_start
+    sudo cvmfs_config setup
+    sudo cvmfs_config probe
   fi
 
   echo "Done"

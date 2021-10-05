@@ -5,6 +5,8 @@
 #| bash_version    :4.2.46 or higher      |
 # ========================================
 
+clear
+
 # dotfiles directory location
 DOTFILE_DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
 
@@ -51,10 +53,10 @@ export HISTSIZE=1000000
 #export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # display
-if [[ $thisMachine =~ ^(local)$ ]]
-then
-  export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
-fi
+#if [[ $thisMachine =~ ^(local)$ ]]
+#then
+  #export DISPLAY=$(grep -m 1 nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+#fi
 
 # ssh agent
 if [[ $thisMachine =~ ^(local)$ ]]
