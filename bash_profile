@@ -5,7 +5,7 @@
 #| bash_version    :4.2.46 or higher      |
 # ========================================
 
-clear
+clear -x
 
 # dotfiles directory location
 DOTFILE_DIR=$(dirname $(readlink -f ${BASH_SOURCE[0]}))
