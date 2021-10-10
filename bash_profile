@@ -78,8 +78,8 @@ fi
 if [[ $thisMachine =~ ^(local)$ ]]
 then
   export KRB5CCNAME="DIR:/tmp"
-  kinit -k -t ~/.ssh/singhr.keytab rsingh@FNAL.GOV
-  kinit -k -t ~/.ssh/singhr.keytab singhr@CERN.CH
+  kinit -R rsingh@FNAL.GOV &> /dev/null || kinit -k -t ~/.ssh/singhr.keytab rsingh@FNAL.GOV
+  kinit -R singhr@CERN.CH &> /dev/null || kinit -k -t ~/.ssh/singhr.keytab singhr@CERN.CH
 fi
 
 # colorize PS1
