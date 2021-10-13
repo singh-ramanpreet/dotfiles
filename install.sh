@@ -46,6 +46,7 @@ done
 
 if [[ $machine_ == "local" ]]; then
   echo "Symbolic Links"
+  rm -f ~/.profile
   ln -s $($force_ && echo "-f") $(dirname $(readlink -f $0))/bash_profile $HOME/.bash_profile
   ln -s $($force_ && echo "-f") $(dirname $(readlink -f $0))/vimrc $HOME/.vimrc
   ln -s $($force_ && echo "-f") $(dirname $(readlink -f $0))/gitconfig $HOME/.gitconfig
