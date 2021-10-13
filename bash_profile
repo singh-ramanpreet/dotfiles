@@ -66,7 +66,7 @@ then
     ln -sf "$SSH_AUTH_SOCK" $HOME/.ssh/ssh_auth_sock
   fi
   export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
-  ssh-add -l > /dev/null || ssh-add $HOME/.ssh/*_rsa
+  ssh-add -l > /dev/null || ssh-add $HOME/.ssh/*_key
 fi
 
 # Kerberos
