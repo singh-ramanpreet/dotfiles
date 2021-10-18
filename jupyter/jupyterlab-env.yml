@@ -5,4 +5,5 @@ dependencies:
   - python
   - pip
   - nodejs
-  - jupyterlab
+  - pip:
+    - jupyterlab
