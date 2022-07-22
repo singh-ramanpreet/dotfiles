@@ -1,0 +1,49 @@
+Host *
+  ServerAliveInterval 15
+# cms lpc
+Host cmslpc*
+  User rsingh
+  HostName %h.fnal.gov
+  ForwardX11 yes
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  GSSAPITrustDNS yes
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  LocalForward 8145 localhost:8145
+
+Host cmslpc-sl7
+  HostName cmslpc-sl7
+
+# cern lxplus
+Host lxplus*
+  User singhr
+  HostName %h.cern.ch
+  ForwardX11 yes
+  ForwardAgent yes
+  GSSAPIAuthentication yes
+  GSSAPIDelegateCredentials yes
+  GSSAPITrustDns yes
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  LocalForward 8011 localhost:8011
+
+Host lxplus7
+  HostName lxplus7
+
+Host cms-connect
+  User singhr
+  HostName login-el7.uscms.org
+  ForwardX11 yes
+  ForwardAgent yes
+
+Host cms1 t3int0
+  User singhr
+  HostName %h.nicadd.niu.edu
+  ForwardX11 yes
+  ForwardAgent yes
+
+Host cms0
+  ProxyJump cms1
+
