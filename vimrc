@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible
+filetype off
 
 set mouse=a
 
@@ -41,7 +41,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call vundle#end()
 
 " If vundle wasn't installed, install it. Now install the plugins.
 if vundle_already_installed == 0
@@ -50,5 +50,4 @@ if vundle_already_installed == 0
   :PluginInstall
 endif
 
-filetype plugin indent on    " required
-
+filetype plugin indent on

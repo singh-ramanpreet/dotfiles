@@ -1,9 +1,0 @@
-name: jupyterlab
-channels:
-  - conda-forge
-dependencies:
-  - python
-  - pip
-  - nodejs
-  - pip:
-    - jupyterlab

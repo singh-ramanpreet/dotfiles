@@ -1,2 +1,2 @@
 # dotfiles
-My Linux Setup Files
+My Setup Files
