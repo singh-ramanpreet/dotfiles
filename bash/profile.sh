@@ -20,7 +20,7 @@ fi
 export HISTCONTROL=ignoreboth:erasedups
 export HISTFILESIZE=1000000
 export HISTSIZE=1000000
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+#export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # ssh agent
 if [[ $THIS_MACHINE =~ (wsl) ]]; then
@@ -30,7 +30,7 @@ if [[ $THIS_MACHINE =~ (wsl) ]]; then
     ln -sf "$SSH_AUTH_SOCK" $HOME/.ssh/ssh_auth_sock
   fi
   export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
-  ssh-add -l > /dev/null || ssh-add $HOME/.ssh/*_key
+  ssh-add -l > /dev/null || ssh-add $(ls $HOME/.ssh/*.pub | sed 's/.pub//')
 fi
 
 
