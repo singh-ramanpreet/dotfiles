@@ -18,6 +18,7 @@ Write-Host "Installing powerline-go"
 if (Test-Path -Path $HOME\bin\powerline-go) {
   rm $HOME\bin\powerline-go
 }
+New-Item -ItemType Directory -Force -Path $HOME\bin
 $repoName = "justjanne/powerline-go"
 $assetPattern = "*-windows-amd64"
 $extractPath = "$HOME\bin\powerline-go"
