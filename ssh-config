@@ -1,2 +1,5 @@
 Host *
   ServerAliveInterval 60
+
+Host homelab
+  User singhr

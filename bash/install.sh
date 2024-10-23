@@ -12,6 +12,7 @@ rm -f ~/.profile
 ln -s -f $DOTFILES_DIR/bash/profile.sh $HOME/.bash_profile
 ln -s -f $DOTFILES_DIR/vimrc $HOME/.vimrc
 ln -s -f $DOTFILES_DIR/gitconfig $HOME/.gitconfig
+ln -s -f $DOTFILES_DIR/ssh-config $HOME/.ssh/config
 echo "... Done"
 
 
