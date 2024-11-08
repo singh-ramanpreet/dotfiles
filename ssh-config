@@ -1,6 +1,8 @@
 Host *
   ServerAliveInterval 60
 
-Host homelab
+Host homelab pi
   User singhr
+  ForwardX11 yes
+  ForwardAgent yes
 
