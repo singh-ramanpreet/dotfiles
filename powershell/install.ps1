@@ -19,18 +19,6 @@ Write-Host "  ... ssh config"
 New-Item -Force -Path $HOME\.ssh\config -ItemType SymbolicLink -Value $dotfilesPath\ssh-config
 
 
-# install powerline-go
-Write-Host "Installing powerline-go"
-if (Test-Path -Path $HOME\bin\powerline-go) {
-  rm $HOME\bin\powerline-go
-}
-New-Item -ItemType Directory -Force -Path $HOME\bin
-$repoName = "justjanne/powerline-go"
-$assetPattern = "*-windows-amd64.exe"
-$extractPath = "$HOME\bin\powerline-go"
-
-$releasesUri = "https://api.github.com/repos/$repoName/releases/latest"
-$asset = (Invoke-WebRequest $releasesUri | ConvertFrom-Json).assets | Where-Object name -like $assetPattern
-$downloadUri = $asset.browser_download_url
-
-Invoke-WebRequest -Uri $downloadUri -Out $extractPath
+# install starship
+Write-Host "Installing starship"
+winget install --id Starship.Starship

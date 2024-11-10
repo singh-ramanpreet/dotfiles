@@ -12,3 +12,5 @@ Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Ser
 ```powershell
 New-Item -ItemType SymbolicLink -Path $env:USERPROFILE\.ssh\id_ed25519 -Value \\wsl$\Ubuntu-20.04\home\$(whoami)\.ssh\id_ed25519
 ```
+
+4. Adjust powershell opening behavior in terminal settings. Append `-nologo` to the `Command line` field in the profile settings.
