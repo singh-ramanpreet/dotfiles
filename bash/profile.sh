@@ -9,29 +9,30 @@ if [[ -f ~/.bashrc ]]; then
   . ~/.bashrc
 fi
 
-# create the socket file on the host with keys
-# example:
-#   nc -U $HOME/.ssh/ssh_auth_sock -l -k &
-#   kill -9 $(lsof -t -U $HOME/.ssh/ssh_auth_sock)
+# Note: Create $HOME/.ssh/ssh_auth_sock as symlink
+#       to any file on the host with keys.
+SSH_AUTH_TESTFILE=$HOME/.ssh/ssh_auth_sock
 
-# check if socket file exists
-# if it does, find the running ssh-agent and
-# set the socket to the one in the file
-# if it doesn't, start a new ssh-agent and
-# clean up old sockets
-if [[ -S $HOME/.ssh/ssh_auth_sock ]]; then
-  if [[ "$(ps -u $USER | grep ssh-agent | wc -l)" -lt "1" ]] then
-    find /tmp -maxdepth 1 -type d -name "ssh-*" -exec rm -rv {} \;
-    eval $(ssh-agent -s)
-    ln -sf "$SSH_AUTH_SOCK" $HOME/.ssh/ssh_auth_sock
+
+# Function to start ssh-agent and create socket
+_start_ssh_agent() {
+  # kill old ssh-agent
+  killall -q ssh-agent
+  # start new ssh-agent
+  eval $(ssh-agent -s)
+  # create symlink to home socket
+  ln -sf "$SSH_AUTH_SOCK" $SSH_AUTH_TESTFILE
+}
+
+
+# Check if socket file exists and manage ssh-agent
+if [[ -L $SSH_AUTH_TESTFILE ]]; then
+  if [[ -S $SSH_AUTH_TESTFILE ]]; then
+    export SSH_AUTH_SOCK=$SSH_AUTH_TESTFILE
+    export SSH_AGENT_PID=$(readlink -f $SSH_AUTH_SOCK | cut -d. -f2)
+  else
+    _start_ssh_agent
   fi
-  export SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
-fi
-
-# if keys present, add them
-if [[ -f $HOME/.ssh/id_rsa.pub ]]; then
-  ssh-add -l >/dev/null || ssh-add $HOME/.ssh/id_rsa
-fi
-if [[ -f $HOME/.ssh/id_ed25519.pub ]]; then
-  ssh-add -l >/dev/null || ssh-add $HOME/.ssh/id_ed25519
+  # add keys to ssh-agent
+  ssh-add -l > /dev/null || ssh-add
 fi
