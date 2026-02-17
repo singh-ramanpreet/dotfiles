@@ -4,6 +4,7 @@
     github = singh-ramanpreet
 [core]
     editor = vim
+    autocrlf = false
 [color]
     ui = true
 [alias]
