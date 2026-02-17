@@ -1,3 +1,4 @@
 [wsl2]
 memory=8GB
 processors=2
+networkingMode=mirrored
