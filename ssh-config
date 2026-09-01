@@ -10,3 +10,9 @@ Host pi
 Host homelab
   HostName homelab.home
   User singhr
+
+Host github-mercor
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519_mercor
+  IdentitiesOnly yes
