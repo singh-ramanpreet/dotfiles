@@ -26,3 +26,5 @@
     stripLeadingSymbols = false
 [credential]
     helper = store
+[init]
+    defaultBranch = main
