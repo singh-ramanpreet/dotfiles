@@ -22,3 +22,6 @@ New-Item -Force -Path $HOME\.ssh\config -ItemType SymbolicLink -Value $dotfilesP
 # install starship
 Write-Host "Installing starship"
 winget install --id Starship.Starship
+
+Write-Host "  ... starship config"
+New-Item -Force -Path $HOME\.config\starship.toml -ItemType SymbolicLink -Value $dotfilesPath\starship.toml
